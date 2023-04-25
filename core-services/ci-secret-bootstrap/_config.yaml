@@ -3063,6 +3063,17 @@ secret_configs:
     name: cert-issuer
     namespace: cert-manager
 - from:
+    AWS_ACCESS_KEY_ID:
+      field: AWS_ACCESS_KEY_ID
+      item: cert-manager-multi01
+    AWS_SECRET_ACCESS_KEY:
+      field: AWS_SECRET_ACCESS_KEY
+      item: cert-manager-multi01
+  to:
+  - cluster: multi01
+    name: route53-credentials
+    namespace: cert-manager
+- from:
     service-account.json:
       field: service-account.json
       item: openshift-ci-release-signature-publisher
@@ -3632,6 +3643,17 @@ secret_configs:
   to:
   - cluster: app.ci
     name: build05-secret
+    namespace: dex
+- from:
+    multi01-id:
+      field: multi01-id
+      item: dex
+    multi01-secret:
+      field: multi01-secret
+      item: dex
+  to:
+  - cluster: app.ci
+    name: multi01-secret
     namespace: dex
 - from:
     dpcr-id:
